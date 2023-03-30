@@ -1,11 +1,5 @@
 """
-Extension classes enhance TouchDesigner components with python. An
-extension is accessed via ext.ExtensionClassName from any operator
-within the extended component. If the extension is promoted via its
-Promote Extension parameter, all its attributes with capitalized names
-can be accessed externally, e.g. op('yourComp').PromotedFunction().
-
-Help: search "Extensions" in wiki
+TDFIL description
 """
 
 from TDStoreTools import StorageManager
@@ -20,6 +14,10 @@ class TDFIL:
 		self.ownerComp = ownerComp
 
 		self.template_BASE = self.ownerComp.op('Templates')
+	
+	@property
+	def Template_ROOT(self):
+		return self.template_BASE
 
 	@property
 	def Template_MaterialAsset(self):
