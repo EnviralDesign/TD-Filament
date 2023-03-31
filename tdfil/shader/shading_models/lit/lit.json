@@ -1,0 +1,109 @@
+{
+  "parameters": [
+    {
+      "name": "baseColor",
+      "type": "float3",
+      "size": "1"
+    },
+    {
+      "name": "metallic",
+      "type": "float",
+      "size": "1"
+    },
+    {
+      "name": "roughness",
+      "type": "float",
+      "size": "1"
+    },
+    {
+      "name": "reflectance",
+      "type": "float",
+      "size": "1"
+    },
+    {
+      "name": "sheenColor",
+      "type": "float3",
+      "size": "1"
+    },
+    {
+      "name": "sheenRoughness",
+      "type": "float",
+      "size": "1"
+    },
+    {
+      "name": "clearCoat",
+      "type": "float",
+      "size": "1"
+    },
+    {
+      "name": "clearCoatRoughness",
+      "type": "float",
+      "size": "1"
+    },
+    {
+      "name": "anisotropy",
+      "type": "float",
+      "size": "1"
+    },
+    {
+      "name": "anisotropyDirection",
+      "type": "float3",
+      "size": "1"
+    },
+    {
+      "name": "ambientOcclusion",
+      "type": "float",
+      "size": "1"
+    },
+    {
+      "name": "normal",
+      "type": "float3",
+      "size": "1"
+    },
+    {
+      "name": "bentNormal",
+      "type": "float3",
+      "size": "1"
+    },
+    {
+      "name": "clearCoatNormal",
+      "type": "float3",
+      "size": "1"
+    },
+    {
+      "name": "emissive",
+      "type": "float4",
+      "size": "1"
+    },
+    {
+      "name": "postLightingColor",
+      "type": "float4",
+      "size": "1"
+    },
+    {
+      "name": "ior",
+      "type": "float",
+      "size": "1"
+    },
+    {
+      "name": "transmission",
+      "type": "float",
+      "size": "1"
+    },
+    {
+      "name": "absorption",
+      "type": "float3",
+      "size": "1"
+    },
+    {
+      "name": "thickness",
+      "type": "float",
+      "size": "1"
+    },
+    {
+      "name": "microThickness",
+      "type": "float",
+      "size": "1"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "parameters": [
+    {
+      "name": "source",
+      "type": "sampler2d",
+      "format": "float",
+      "precision": "medium"
+    },
+    {
+      "name": "axis",
+      "type": "float2",
+      "size": "1"
+    },
+    {
+      "name": "level",
+      "type": "float",
+      "size": "1"
+    },
+    {
+      "name": "layer",
+      "type": "float",
+      "size": "1"
+    },
+    {
+      "name": "count",
+      "type": "int",
+      "size": "1"
+    },
+    {
+      "name": "reinhard",
+      "type": "int",
+      "size": "1"
+    },
+    {
+      "name": "kernel",
+      "type": "float2",
+      "size": "32"
+    }
+  ]
+}

@@ -1,0 +1,184 @@
+material {
+    name : lit,
+    featureLevel : 3,
+    shadingModel : lit,
+    blending : opaque,
+
+    // defaults to true
+    flipUV : false,
+
+    // for desktop, should always be high.
+    quality : high,
+
+    // set to true if we want to access the instance index in shader.
+    instanced : false,
+
+    // Each entry must be any of uv0, uv1, color, position, tangents, custom0 through custom7.
+    requires : [
+        uv0
+    ],
+
+    // Any of object, world, view, device. Defaults to object.
+    vertexDomain : object,
+
+    // Any of none, cubemap, screenspace. Defaults to none.
+    refractionMode : cubemap,
+
+    // Any of solid, thin. Defaults to solid.
+    refractionType : solid,
+
+    doubleSided : false,
+
+    // default or screenspace. Defaults to default. default means just image based lighting contributes.
+    reflections : default,
+
+    // true or false. Defaults to false.
+    transparentShadow : false,
+
+    // true or false. Defaults to true.
+    clearCoatIorChange : true,
+
+    // true or false. Defaults to true.
+    multiBounceAmbientOcclusion : true,
+
+    // none, simple or bentNormals. Defaults to none on mobile, simple on desktop. 
+    specularAmbientOcclusion : simple,
+
+    // true or false. Defaults to false.
+    specularAntiAliasing : true,
+
+    // 0.0 to 1.0. Defaults to 0.15.
+    specularAntiAliasingVariance : 0.15,
+
+    // 0.0 to 1.0. Defaults to 0.2.
+    specularAntiAliasingThreshold : 0.2,
+
+    parameters : [
+        {
+            type : float3,
+            name : baseColor
+        },
+        {
+            type : float,
+            name : metallic
+        },
+        {
+            type : float,
+            name : roughness
+        },
+        {
+            type : float,
+            name : reflectance
+        },
+        {
+            type : float3,
+            name : sheenColor
+        },
+        {
+            type : float,
+            name : sheenRoughness
+        },
+        {
+            type : float,
+            name : clearCoat
+        },
+        {
+            type : float,
+            name : clearCoatRoughness
+        },
+        {
+            type : float,
+            name : anisotropy
+        },
+        {
+            type : float3,
+            name : anisotropyDirection
+        },
+        {
+            type : float,
+            name : ambientOcclusion
+        },
+        {
+            type : float3,
+            name : normal
+        },
+        {
+            type : float3,
+            name : bentNormal
+        },
+        {
+            type : float3,
+            name : clearCoatNormal
+        },
+        {
+            type : float4,
+            name : emissive
+        },
+        {
+            type : float4,
+            name : postLightingColor
+        },
+        {
+            type : float,
+            name : ior
+        },
+        {
+            type : float,
+            name : transmission
+        },
+        {
+            type : float3,
+            name : absorption
+        },
+        {
+            type : float,
+            name : thickness
+        },
+        {
+            type : float,
+            name : microThickness
+        }
+    ]
+}
+
+vertex {
+  void materialVertex(inout MaterialVertexInputs material) {
+    }
+}
+
+fragment {
+    void material(inout MaterialInputs material) {
+
+        // CUSTOM_FRAGMENT_CODE_STARTS_HERE
+        // NOTE: This string comment above is used for parsing downstream, do not modifiy or delete.
+
+        //material.normal = materialParams.normal;
+        //material.bentNormal = materialParams.bentNormal;
+        //material.clearCoatNormal = materialParams.clearCoatNormal;
+        
+        prepareMaterial(material);
+
+        //material.baseColor.rgb = materialParams.baseColor;
+        //material.metallic = materialParams.metallic;
+        //material.roughness = materialParams.roughness;
+        //material.reflectance = materialParams.reflectance;
+        //material.sheenColor = materialParams.sheenColor;
+        //material.sheenRoughness = materialParams.sheenRoughness;
+        //material.clearCoat = materialParams.clearCoat;
+        //material.clearCoatRoughness = materialParams.clearCoatRoughness;
+        //material.anisotropy = materialParams.anisotropy;
+        //material.anisotropyDirection = materialParams.anisotropyDirection;
+        //material.ambientOcclusion = materialParams.ambientOcclusion;
+        //material.emissive = materialParams.emissive;
+        //material.postLightingColor = materialParams.postLightingColor;
+        //material.ior = materialParams.ior;
+        //material.transmission = materialParams.transmission;
+        //material.absorption = materialParams.absorption;
+        //material.thickness = materialParams.thickness;
+        //material.microThickness = materialParams.microThickness;
+
+        // NOTE: This string comment below is used for parsing downstream, do not modifiy or delete.
+        // CUSTOM_FRAGMENT_CODE_ENDS_HERE
+
+    }
+}

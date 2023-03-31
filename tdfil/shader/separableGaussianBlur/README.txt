@@ -1,0 +1,1 @@
+the fs and vs files are referenced and included in the .mat's when compiled, so they must be next to the .mat files.
