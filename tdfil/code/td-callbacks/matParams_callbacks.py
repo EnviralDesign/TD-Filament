@@ -4,7 +4,7 @@
 def onCook(scriptOp):
 	scriptOp.clear()
 
-	materialParams = op.TDF.MaterialParamsTemplate()
+	materialParams = op.TDFIL.MaterialParamsTemplate()
 
 	materialParams.Set_baseColor(
 		parent.obj.par.Basecoloruniformr.eval(),

@@ -19,9 +19,11 @@ class TDFIL:
 		self.template_BASE = self.ownerComp.op('Templates')
 		self.TypeGroup_DAT = self.ownerComp.op('TypeGroups/groups')
 		self.ShaderVariant_DAT = self.ownerComp.op('shaderVariants/null_shader_variants')
+		self.Td2filament_DAT = self.ownerComp.op('shaderVariants/td_2_filament')
 		self.PrimitiveList_DAT = self.ownerComp.op('PrimitiveTemplates/null_prim_list')
 		self.ThumbnailManager_COMP = self.ownerComp.op('ThumbnailManager')
 		self.ShaderInputs_COMP = self.ownerComp.op('ShaderInputs')
+		self.SceneExt_DAT = self.ownerComp.op('sceneext')
 
 		self.style = {
 			'bgcolorr':0.05,
@@ -89,6 +91,7 @@ class TDFIL:
 	def Template_ROOT(self):
 		return self.template_BASE
 
+	#### Asset Templates ####
 	@property
 	def Template_MaterialAsset(self):
 		return self.template_BASE.op('material_asset_v3')
@@ -109,7 +112,14 @@ class TDFIL:
 	def Template_EnvlightAsset(self):
 		return self.template_BASE.op('fila_envLight_asset')
 	
-
+	#### UI Templates ####
+	@property
+	def Template_UiHeader(self):
+		return self.template_BASE.op('Ui_Header')
+	
+	@property
+	def Template_UiButton(self):
+		return self.template_BASE.op('Ui_Button')
 
 
 
@@ -146,3 +156,39 @@ class TDFIL:
 			return None
 		
 		return filtered_shader_variants[0]
+
+	def TraceFunctionCall(self):
+		'''
+		This function will print the entire function call's 
+		stack trace showing what called what where.
+		Obviously if you use scriptDat.run() 
+		it will break the function call chain.
+		'''
+		inspectedStack = inspect.stack()
+		print('qwe')
+		source = []
+		line = []
+		function = []
+		for f in inspectedStack[::-1]:
+			frameInfo = inspect.getframeinfo(f[0])
+			source += [frameInfo[0]]
+			line += [str(frameInfo[1])]
+			function += [frameInfo[2]]
+
+		source_max = max( [len(x) for x in source] )
+		line_max = max( [len(x) for x in line] )
+		function_max = max( [len(x) for x in function] )
+
+		print('-'*(source_max+line_max+function_max+11))
+
+		for i,f in enumerate(zip(source,line,function)):
+			f = list(f)
+			source_ = f[0].ljust(source_max)
+			line_ = f[1].ljust(line_max)
+			function_ = (f[2]+'()').ljust(function_max)
+
+			print('%i) %s : %s : %s'%(i,source_,line_,function_))
+
+		print('-'*(source_max+line_max+function_max+11))
+
+		return
