@@ -1,5 +1,8 @@
-#import natsort
-debug('needto get natsort implemented in v3...')
+import sys
+sys.path.insert(0,project.folder + '/tdfil/thirdparty/natsort')
+
+import natsort
+# debug('needto get natsort implemented in v3...')
 
 class scenemanagerext:
 	"""

@@ -84,5 +84,6 @@ TouchDesignerCrash.*.dmp
 # Windows shortcuts
 # *.lnk
 
-
+### temporary exclusions...
 tdfil/hdr/*
+tdfil/samples/assets/SubstanceShaderTester/*

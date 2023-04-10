@@ -9,7 +9,7 @@ class transformgizmoext:
 	def __init__(self, ownerComp):
 		# The component to which this extension is attached
 		self.ownerComp = ownerComp
-		self.SourcePanelCOMP = self.ownerComp.par.Panelcomp.eval()
+		self.SourcePanelCOMP = self.ownerComp.par.Editorcomp.eval()
 		self.SceneCOMP = self.ownerComp.par.Scenecomp.eval()
 
 		self.ownerComp.par.Visible = self.ownerComp.par.Visible.default # true

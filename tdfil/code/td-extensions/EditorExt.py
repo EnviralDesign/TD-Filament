@@ -12,6 +12,9 @@ class EditorExt:
 		self.outlinerWrapper = self.ownerComp.op('container_outliner_wrapper')
 		self.attrEditor = self.ownerComp.op('container_UG_V4')
 
+		self.TransformGizmo_COMP = self.ownerComp.op('Viewport/TransformGizmo')
+		self.InstancePainterGizmo_COMP = self.ownerComp.op('Viewport/InstancePainterGizmo')
+
 		# initialize container to sensible default size.
 		self.ownerComp.par.w = 1280
 		self.ownerComp.par.h = 720

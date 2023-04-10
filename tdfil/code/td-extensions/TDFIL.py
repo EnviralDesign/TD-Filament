@@ -2,8 +2,9 @@
 TDFIL description
 """
 
-# from TDStoreTools import StorageManager
-# import TDFunctions as TDF
+import sys
+sys.path.append(project.folder + 'tdfil/thirdparty/natsort')
+
 
 import td
 import inspect
@@ -22,7 +23,7 @@ class TDFIL:
 		self.Td2filament_DAT = self.ownerComp.op('shaderVariants/td_2_filament')
 		self.PrimitiveList_DAT = self.ownerComp.op('PrimitiveTemplates/null_prim_list')
 		self.ThumbnailManager_COMP = self.ownerComp.op('ThumbnailManager')
-		self.ShaderInputs_COMP = self.ownerComp.op('ShaderInputs')
+		# self.ShaderInputs_COMP = self.ownerComp.op('ShaderInputs')
 		self.SceneExt_DAT = self.ownerComp.op('sceneext')
 
 		self.style = {
@@ -191,4 +192,10 @@ class TDFIL:
 
 		print('-'*(source_max+line_max+function_max+11))
 
+		return
+	
+
+
+	def Natsort_os_sorted(self):
+		pass
 		return
