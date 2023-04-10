@@ -121,6 +121,47 @@ class TDFIL:
 	@property
 	def Template_UiButton(self):
 		return self.template_BASE.op('Ui_Button')
+	
+	#### Render Templates ####
+	@property
+	def Template_RenderDepthPrepass(self):
+		return self.template_BASE.op('RENDER_Depth_Prepass')
+	
+	@property
+	def Template_RenderOpaque(self):
+		return self.template_BASE.op('RENDER_Opaque')
+	
+	@property
+	def Template_RenderTransparent(self):
+		return self.template_BASE.op('RENDER_Transparent')
+	
+	@property
+	def Template_RenderXegtao(self):
+		return self.template_BASE.op('XeGTAO')
+	
+	@property
+	def Template_ProcessSsr(self):
+		return self.template_BASE.op('PROCESS_Ssr')
+	
+	@property
+	def Template_SceneManager(self):
+		return self.template_BASE.op('SceneManager')
+	
+	@property
+	def Template_ShaderInputs(self):
+		return self.template_BASE.op('ShaderInputs')
+	
+	@property
+	def Template_LightManager(self):
+		return self.template_BASE.op('LightManager')
+	
+	@property
+	def Template_13TapBloom(self):
+		return self.template_BASE.op('base_13_tap_bloom')
+	
+	@property
+	def Template_ColorGrading(self):
+		return self.template_BASE.op('ColorGrading')
 
 
 
