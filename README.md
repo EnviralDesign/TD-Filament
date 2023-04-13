@@ -1,5 +1,8 @@
 # TD-Filament
-an opensource rendering engine for TouchDesigner built with Filament, and other opensource rendering tech
+An opensource rendering engine for TouchDesigner built with [Filament](https://github.com/google/filament), and other opensource rendering tech.
+Developed and maintained by [Lucas Morgan](https://github.com/EnviralDesign)
+
+
 
 ## Getting Started
 
