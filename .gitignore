@@ -87,3 +87,4 @@ TouchDesignerCrash.*.dmp
 ### temporary exclusions...
 tdfil/hdr/*
 tdfil/samples/assets/SubstanceShaderTester/*
+CrashAutoSave.toe

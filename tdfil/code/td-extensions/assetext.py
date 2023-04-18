@@ -21,6 +21,7 @@ class assetext:
 		self.setDAT = self.ownerComp.op('SET')
 		self.bufferDAT = self.ownerComp.op('BUFFER')
 
+
 	def Texture_Check(self, texture_file_parameter):
 		'''
 		Function for checking the existance of a texture file, and also checking it's extension is of an image.
@@ -85,12 +86,12 @@ class assetext:
 		hasBounds = False
 
 		### STANDARD GEO - computeBounds()
-		if self.ownerComp.par.Objtype.eval() in parent.Viewport.Type_Group('GEOMETRY'):
+		if self.ownerComp.par.Objtype.eval() in op.TDFIL.Type_Group('GEOMETRY'):
 			tdBounds = self.ownerComp.computeBounds()
 			hasBounds = True
 
 		### LIGHT COMP - computeBounds()
-		elif self.ownerComp.par.Objtype.eval() in parent.Viewport.Type_Group('XFORM_LIGHTS'):
+		elif self.ownerComp.par.Objtype.eval() in op.TDFIL.Type_Group('XFORM_LIGHTS'):
 			tdBounds = self.ownerComp.op('geo_helper').computeBounds()
 			hasBounds = True
 		
@@ -184,7 +185,6 @@ class assetext:
 		foundParents = [op(x) for x in foundParents]
 		return foundParents
 
-
 	def Material_Path(self):
 		'''
 		given a path to a file, this function tests it to see if it exists,
@@ -195,7 +195,29 @@ class assetext:
 		'''
 		materialOP = self.ownerComp.par.Materialcomp.eval()
 		return materialOP.op('mat') if materialOP != None else ''
+	
+	def Schedule_ThumbnailUpdate(self, delay_frames=0):
+		'''
+		Prime the thumbnail update by locking the thumbnail, and then calling the update.
+		'''
+		
+		# to avoid multiple thumbnail updates from happening at the same time, we need to
+		# check how many are currently queued, and then add that number to the delay_frames
+		# so that the thumbnail update will happen after all the other queued ones.
+		currently_qued_node_ids = [ x.group for x in runs if x.group != None ]
+		num_currently_qued_nodes = len(list(set(currently_qued_node_ids)))	
 
+		# op.TDFIL.TraceFunctionCall() # debugging
+
+		# kill any existing runs for this node
+		node_id = self.ownerComp.id
+		for r in runs:
+			if r.group == f'{node_id}':
+				r.kill()
+		
+		# schedule a new run
+		run(f'op({node_id}).Update_Thumbnail()', group=f'{node_id}', delayFrames=delay_frames + num_currently_qued_nodes)
+		return
 
 	def Update_Thumbnail(self):
 		Thumbnailmanagercomp = None
@@ -208,7 +230,6 @@ class assetext:
 			Thumbnailmanagercomp = parent.Camera.par.Thumbnailmanagercomp.eval()
 		except:
 			pass
-	
 		
 		if Thumbnailmanagercomp == None:
 			debug('Thumbnailmanagercomp is invalid, skipping thumbnail generation...')
@@ -224,7 +245,6 @@ class assetext:
 			return
 		
 		Thumbnailmanagercomp.Create_Thumbnail( self.thumbnailTOP , self.ownerComp , self.opPanelCOMP.width )
-
 
 	def Get_Data(self):
 		'''

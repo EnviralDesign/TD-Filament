@@ -123,6 +123,8 @@ def define_AMBIENT_OCCULSION(scriptOp):
 		if parent.obj.par.Ambientocclusionmethod.menuIndex in [1]:
 			scriptOp.text += f'uniform sampler2D mat_ambientOcclusion; \n'
 			scriptOp.text += f'#define MATERIAL_HAS_AMBIENT_OCCLUSION\n'
+		if parent.obj.par.Globalssao.menuIndex in [1]:
+			scriptOp.text += f'#define MATERIAL_HAS_SSAO\n'
 		scriptOp.text += '\n'
 	return
 

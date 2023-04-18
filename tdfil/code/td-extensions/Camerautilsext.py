@@ -33,11 +33,13 @@ class CameraUtilsExt:
 		# debug( 'homing cam to...' )
 
 
-		CameraCOMP = ipar.Viewport.Cameracomp.eval()
+		# CameraCOMP = ipar.Viewport.Cameracomp.eval()
+		CameraCOMP = self.ownerComp
 		ViewMatrix = CameraCOMP.worldTransform
 		ViewDirection = ViewMatrix * tdu.Vector(0,0,-1)
 		ViewDirection.normalize()
-		SceneCOMP = ipar.Viewport.Scenecomp.eval()
+		# SceneCOMP = ipar.Viewport.Scenecomp.eval()
+		SceneCOMP = self.ownerComp.par.Scenecomp.eval()
 		scene_objects = SceneCOMP.Objects
 		scene_objects = [ x for x in scene_objects if x.selected == True ]
 

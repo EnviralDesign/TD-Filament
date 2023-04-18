@@ -16,18 +16,18 @@ class scenemanagerext:
 
 
 	def Refresh_All_Thumbnails(self):
-		Scenecomp = ipar.Viewport.Scenecomp.eval()
+		Scenecomp = parent.module.par.Scenecomp.eval()
 		if Scenecomp == None:
 			debug('Scenecomp is invalid, cannot refresh all thumbnails...')
 			return
 		
-		materialCOMPs = Scenecomp.findChildren( parName='Objtype', parValue=parent.Viewport.Type_Group('MATERIAL')[0] )
+		materialCOMPs = Scenecomp.findChildren( parName='Objtype', parValue=op.TDFIL.Type_Group('MATERIAL')[0] )
 		for each in materialCOMPs:
-			each.Update_Thumbnail()
+			each.Schedule_ThumbnailUpdate(0)
 		
-		meshCOMPs = Scenecomp.findChildren( parName='Objtype', parValue=parent.Viewport.Type_Group('MESH')[0] )
+		meshCOMPs = Scenecomp.findChildren( parName='Objtype', parValue=op.TDFIL.Type_Group('MESH')[0] )
 		for each in meshCOMPs:
-			each.Update_Thumbnail()
+			each.Schedule_ThumbnailUpdate(0)
 
 	@property
 	def Scene_Objects_DAT(self):

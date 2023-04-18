@@ -23,6 +23,7 @@ class TDFIL:
 		self.Td2filament_DAT = self.ownerComp.op('shaderVariants/td_2_filament')
 		self.PrimitiveList_DAT = self.ownerComp.op('PrimitiveTemplates/null_prim_list')
 		self.ThumbnailManager_COMP = self.ownerComp.op('ThumbnailManager')
+		self.SettingsManager_COMP = self.ownerComp.op('SettingsManager')
 		# self.ShaderInputs_COMP = self.ownerComp.op('ShaderInputs')
 		self.SceneExt_DAT = self.ownerComp.op('sceneext')
 
@@ -93,77 +94,89 @@ class TDFIL:
 		return self.template_BASE
 
 	#### Asset Templates ####
-	@property
-	def Template_MaterialAsset(self):
-		return self.template_BASE.op('material_asset_v3')
+	# @property
+	# def Template_MaterialAsset(self):
+	# 	return self.template_BASE.op('material_asset_v3')
 	
-	@property
-	def Template_MeshAsset(self):
-		return self.template_BASE.op('mesh_asset')
+	# @property
+	# def Template_MeshAsset(self):
+	# 	return self.template_BASE.op('mesh_asset')
 	
-	@property
-	def Template_NullAsset(self):
-		return self.template_BASE.op('null_asset')
+	# @property
+	# def Template_NullAsset(self):
+	# 	return self.template_BASE.op('null_asset')
 	
-	@property
-	def Template_CameraAsset(self):
-		return self.template_BASE.op('fila_editor_camera_asset')
+	# @property
+	# def Template_CameraAsset(self):
+	# 	return self.template_BASE.op('fila_editor_camera_asset')
 	
-	@property
-	def Template_EnvlightAsset(self):
-		return self.template_BASE.op('fila_envLight_asset')
+	# @property
+	# def Template_EnvlightAsset(self):
+	# 	return self.template_BASE.op('fila_envLight_asset')
 	
-	#### UI Templates ####
-	@property
-	def Template_UiHeader(self):
-		return self.template_BASE.op('Ui_Header')
+	# #### UI Templates ####
+	# @property
+	# def Template_UiHeader(self):
+	# 	return self.template_BASE.op('Ui_Header')
 	
-	@property
-	def Template_UiButton(self):
-		return self.template_BASE.op('Ui_Button')
+	# @property
+	# def Template_UiButton(self):
+	# 	return self.template_BASE.op('Ui_Button')
 	
 	#### Render Templates ####
-	@property
-	def Template_RenderDepthPrepass(self):
-		return self.template_BASE.op('RENDER_Depth_Prepass')
+	# @property
+	# def Template_RenderDepthPrepass(self):
+	# 	return self.template_BASE.op('RENDER_Depth_Prepass')
 	
-	@property
-	def Template_RenderOpaque(self):
-		return self.template_BASE.op('RENDER_Opaque')
+	# @property
+	# def Template_RenderOpaque(self):
+	# 	return self.template_BASE.op('RENDER_Opaque')
 	
-	@property
-	def Template_RenderTransparent(self):
-		return self.template_BASE.op('RENDER_Transparent')
+	# @property
+	# def Template_RenderTransparent(self):
+	# 	return self.template_BASE.op('RENDER_Transparent')
 	
-	@property
-	def Template_RenderXegtao(self):
-		return self.template_BASE.op('XeGTAO')
+	# @property
+	# def Template_RenderXegtao(self):
+	# 	return self.template_BASE.op('XeGTAO')
 	
-	@property
-	def Template_ProcessSsr(self):
-		return self.template_BASE.op('PROCESS_Ssr')
+	# @property
+	# def Template_ProcessSsr(self):
+	# 	return self.template_BASE.op('PROCESS_Ssr')
 	
-	@property
-	def Template_SceneManager(self):
-		return self.template_BASE.op('SceneManager')
+	# @property
+	# def Template_SceneManager(self):
+	# 	return self.template_BASE.op('SceneManager')
 	
-	@property
-	def Template_ShaderInputs(self):
-		return self.template_BASE.op('ShaderInputs')
+	# @property
+	# def Template_ShaderInputs(self):
+	# 	return self.template_BASE.op('ShaderInputs')
 	
-	@property
-	def Template_LightManager(self):
-		return self.template_BASE.op('LightManager')
+	# @property
+	# def Template_LightManager(self):
+	# 	return self.template_BASE.op('LightManager')
 	
-	@property
-	def Template_13TapBloom(self):
-		return self.template_BASE.op('base_13_tap_bloom')
+	# @property
+	# def Template_13TapBloom(self):
+	# 	return self.template_BASE.op('base_13_tap_bloom')
 	
-	@property
-	def Template_ColorGrading(self):
-		return self.template_BASE.op('ColorGrading')
+	# @property
+	# def Template_ColorGrading(self):
+	# 	return self.template_BASE.op('ColorGrading')
+	
+	# @property
+	# def Template_SettingsManager(self):
+	# 	return self.template_BASE.op('SettingsManager')
+	
+	#### Meta Templates ####
+	# @property
+	# def Template_Renderer(self):
+	# 	return self.ownerComp.op('Renderer')
 
-
+	#### comp references ####
+	@property
+	def Editor(self):
+		return self.ownerComp.op('editor') ##### THIS IS WRONG BUT LETS TD START UP
 
 	def Type_Group(self, typeGroupStr=''):
 		'''

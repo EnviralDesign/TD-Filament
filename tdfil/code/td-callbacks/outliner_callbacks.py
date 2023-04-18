@@ -283,16 +283,16 @@ def onSelect(comp, startRow, startCol, startCoords, endRow, endCol, endCoords, s
 		if mode == 'selection':
 			
 			# STICKY CAMERA
-			if startRow == endRow and Objtype in op.Viewport.Type_Group('CAMERA'):
-				op.Viewport.Scene.Deselect_All_Objects()
-				op.Viewport.Scene.Deselect_All_Instances()
-				op.Viewport.Camera.selected = True
+			if startRow == endRow and Objtype in op.TDFIL.Type_Group('CAMERA'):
+				parent.Editor.Scene.Deselect_All_Objects()
+				parent.Editor.Scene.Deselect_All_Instances()
+				parent.Editor.Camera.selected = True
 				
 			# STICKY LIGHT MANAGER
-			elif startRow == endRow and Objtype in op.Viewport.Type_Group('LIGHTMANAGER'):
-				op.Viewport.Scene.Deselect_All_Objects()
-				op.Viewport.Scene.Deselect_All_Instances()
-				op.Viewport.SettingsManager.selected = True
+			elif startRow == endRow and Objtype in op.TDFIL.Type_Group('LIGHTMANAGER'):
+				parent.Editor.Scene.Deselect_All_Objects()
+				parent.Editor.Scene.Deselect_All_Instances()
+				parent.Editor.SettingsManager.selected = True
 			
 			# the general case. this is 99% of the time.
 			else:
@@ -313,15 +313,15 @@ def onSelect(comp, startRow, startCol, startCoords, endRow, endCol, endCoords, s
 
 				# if no modifiers are down
 				if max(shift,ctrl) == False:
-					op.Viewport.Scene.Select_Objects(sel,clear_previous=True)
+					parent.Editor.Scene.Select_Objects(sel,clear_previous=True)
 
 				# if shift only is down
 				elif shift == True and ctrl == False:
-					op.Viewport.Scene.Select_Objects(sel,clear_previous=False)
+					parent.Editor.Scene.Select_Objects(sel,clear_previous=False)
 
 				# if ctrl only is down
 				elif shift == False and ctrl == True:
-					op.Viewport.Scene.Deselect_Objects( sel )
+					parent.Editor.Scene.Deselect_Objects( sel )
 
 		elif mode == 'expandcollapse':
 			
@@ -345,7 +345,7 @@ def onEdit(comp, row, col, val):
 	targetOP = op(sceneListDat[row+1,'path'])
 	Objtype = int(sceneListDat[row+1,'Objtype'])
 
-	if Objtype in op.Viewport.Type_Group('SYSTEM'):
+	if Objtype in op.TDFIL.Type_Group('SYSTEM'):
 		debug('cannot rename system nodes...')
 		return
 

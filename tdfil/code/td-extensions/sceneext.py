@@ -9,6 +9,14 @@ class sceneext:
 		self.ownerComp = ownerComp
 	
 	@property
+	def Camera(self):
+		return self.ownerComp.par.Editorcomp.eval().Camera
+	
+	@property
+	def SettingsManager(self):
+		return self.ownerComp.par.Editorcomp.eval().SettingsManager
+	
+	@property
 	def Objects(self):
 		'''
 		returns a list of objects that exist within the scene COMP, 
@@ -25,7 +33,7 @@ class sceneext:
 		'''
 		
 		comps = self.Objects
-		comps = [ x for x in comps if x.par.Objtype.eval() in parent.Viewport.Type_Group('INSTANCEABLE') ] # mesh objects only.
+		comps = [ x for x in comps if x.par.Objtype.eval() in op.TDFIL.Type_Group('INSTANCEABLE') ] # mesh objects only.
 		comps = [ x for x in comps if x.par.Enableinstancing.eval() == True ]
 		
 		instances = []
@@ -39,13 +47,16 @@ class sceneext:
 		but they do not really belong to the general scene, they are above that. so, we have a special deselection function
 		called here, that is called almost any time other selection functions are called so we don't get them intermingled.
 		'''
-		Cameracomp = ipar.Viewport.Cameracomp.eval()
-		Cameracomp.selected = False
-		Cameracomp.current = False
+		Cameracomp = self.Camera
+		if Cameracomp != None:
+			Cameracomp.selected = False
+			Cameracomp.current = False
 
-		Settingsmanagercomp = ipar.Viewport.Settingsmanagercomp.eval()
-		Settingsmanagercomp.selected = False
-		Settingsmanagercomp.current = False
+		Settingsmanagercomp = self.SettingsManager
+		if Settingsmanagercomp != None:
+			Settingsmanagercomp.selected = False
+			Settingsmanagercomp.current = False
+
 		return
 
 	@property
@@ -82,7 +93,7 @@ class sceneext:
 			if clear_previous == True:
 				self.Deselect_All_Objects()
 				for each in self.Objects:
-					if each.par.Objtype.eval() in parent.Viewport.Type_Group('INSTANCEABLE'):
+					if each.par.Objtype.eval() in op.TDFIL.Type_Group('INSTANCEABLE'):
 						each.Deselect_All_Instances()
 			object.selected = True
 			object.current = True
@@ -124,7 +135,7 @@ class sceneext:
 	def Deselect_All_Instances(self, parent_object=None):
 		self.Deselect_Special()
 		if parent_object == None:
-			instanceable_objects = [ x for x in self.Objects if x.par.Objtype.eval() in parent.Viewport.Type_Group('INSTANCEABLE') ]
+			instanceable_objects = [ x for x in self.Objects if x.par.Objtype.eval() in op.TDFIL.Type_Group('INSTANCEABLE') ]
 			for each in instanceable_objects:
 				each.Deselect_All_Instances()
 		return
