@@ -49,8 +49,16 @@ class EditorExt:
 	def SettingsManager(self):
 		return self.ownerComp.op('Viewport/Renderer/SettingsManager')
 	
+	@property
+	def Scene(self):
+		return self.ownerComp.par.Scenecomp.eval()
+	
+	@property
+	def Template_ROOT(self):
+		return op.TDFIL.Template_ROOT
+	
 	def Create_Object(self, Objtype):
-		f = self.TemplateCOMP.findChildren(parName='Objtype')
+		f = self.Template_ROOT.findChildren(parName='Objtype')
 		f = [ x for x in f if x.par.Objtype.eval() == Objtype ]
 
 		if len(f) == 0:
@@ -184,3 +192,27 @@ class EditorExt:
 			debug('toxpath ended up being None, skipping load procedure...')
 
 		return
+	
+	def Delete_Selected(self):
+		self.Scene.Delete_Selected()
+
+	def Duplicate_Selected(self):
+		self.Scene.Duplicate_Selected()
+
+	def Parent_Selected_To_Current(self):
+		self.Scene.Parent_Selected_To_Current()
+
+	def Unparent_Selected(self):
+		self.Scene.Unparent_Selected()
+	
+	def Select_Immediate_Parents(self):
+		self.Scene.Select_Immediate_Parents()
+	
+	def Select_Immediate_Children(self):
+		self.Scene.Select_Immediate_Children()
+
+	def Deselect_All_Objects(self):
+		self.Scene.Deselect_All_Objects()
+
+	def Deselect_All_Instances(self):
+		self.Scene.Deselect_All_Instances()

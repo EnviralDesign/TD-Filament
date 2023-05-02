@@ -1314,6 +1314,11 @@ class MaterialParams:
 		self.reinhard = 0.0
 		self.count = 0
 		self.kernel = [[0.0, 0.0] for _ in range(self._max_kernel_size)]
+
+		self.constantColor = 0
+		self.showSun = 0
+		self.color = [0.0, 0.0, 0.0, 1.0] # for environment lighting uniform color.
+
 	
 	def sRGB_to_linear(self, c):
 		# assumes c is in the range [0, 1]
@@ -1514,6 +1519,15 @@ class MaterialParams:
 		for each in kernel:
 			self.kernel.append([each[0],each[1]])
 	
+	def Set_constantColor(self, state):
+		self.constantColor = int(state)
+	
+	def Set_showSun(self, state):
+		self.showSun = int(state)
+	
+	def Set_color(self, r,g,b,a):
+		self.color = [self.sRGB_to_linear(r), self.sRGB_to_linear(g), self.sRGB_to_linear(b), a]
+	
 	def Print_All(self):
 		
 		print("baseColor: " + str(self.baseColor))
@@ -1590,6 +1604,9 @@ class MaterialParams:
 		ret += [self.count] # 46
 		ret += [self.emissiveLuminance] # 47
 		ret += [self.alpha] # 48
+		ret += [self.constantColor] # 49
+		ret += [self.showSun] # 50
+		ret += self.color # 51, 52, 53, 54
 
 		# self.Print_All()
 

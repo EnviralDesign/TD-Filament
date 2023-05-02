@@ -1,5 +1,5 @@
 // Better, temporally stable box filtering
-// [Jimenez14] http://goo.gl/eomGso
+// [Jimenez14] https://goo.gl/eomGso
 // . . . . . . .
 // . A . B . C .
 // . . D . E . .

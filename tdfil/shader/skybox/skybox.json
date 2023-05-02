@@ -1,0 +1,25 @@
+{
+  "parameters": [
+    {
+      "name": "showSun",
+      "type": "int",
+      "size": "1"
+    },
+    {
+      "name": "constantColor",
+      "type": "int",
+      "size": "1"
+    },
+    {
+      "name": "skybox",
+      "type": "samplerCubemap",
+      "format": "float",
+      "precision": "default"
+    },
+    {
+      "name": "color",
+      "type": "float4",
+      "size": "1"
+    }
+  ]
+}

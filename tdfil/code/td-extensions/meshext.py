@@ -29,20 +29,20 @@ class meshext:
 
 		f = self.instancerCOMP.findChildren(type=geometryCOMP, depth=1)
 		if len(f) == 0:
-			template = ipar.Viewport.Instancetemplatecomp.eval()
+			template = op.TDFIL.Template_ROOT.op('inst')
 			n = self.instancerCOMP.copy(template)
 			n.nodeX = 0; n.nodeY = 0
 			n.name += '_0'
 
 	def Create_Instance(self, payload, offsets, sharedParent):
+		# print(payload)
 
-
-		if parent.obj.par.Objtype.eval() not in parent.Viewport.Type_Group('INSTANCEABLE'):
+		if parent.obj.par.Objtype.eval() not in op.TDFIL.Type_Group('INSTANCEABLE'):
 			# debug(f'cannot create instance of object type {parent.obj.par.Objtype}, this is an error, you shouldnt have gotten this far...')
 			# disabling this error, because if the user has some items parented to a null, we want them to be able to instance the children of the null as a group.
 			pass
 		else:
-			template = ipar.Viewport.Instancetemplatecomp.eval()
+			template = op.TDFIL.Template_ROOT.op('inst')
 			n = self.instancerCOMP.copy(template)
 
 			tx,ty,tz = payload.get('tx',0),payload.get('ty',0),payload.get('tz',0)
@@ -67,19 +67,10 @@ class meshext:
 				parent_matrix_inverse.invert()
 			else:
 				parent_matrix_inverse = self.ownerComp.relativeTransform(sharedParent)
-				# parent_matrix_inverse = tdu.Matrix()
-				# parent_matrix_inverse.rotate(0,180,0)
-				# parent_matrix_inverse = sharedParent.relativeTransform(self.ownerComp)
-				# parent_matrix_inverse = sharedParent.worldTransform
-				# parent_matrix_inverse.invert()
-				# print('ASKLJHDSDEFGHKSFDGNMB<')
-				# parent_matrix_inverse.invert()
 			
 			ttt = parent_matrix_inverse.decompose()[2]
 			rrr = parent_matrix_inverse.decompose()[1]
 			sss = parent_matrix_inverse.decompose()[0]
-			# print(self.ownerComp, rrr)
-			# print(rx,ry,rz)
 
 			instance_matrix = tdu.Matrix()
 			instance_matrix.scale(sx,sy,sz)
@@ -87,7 +78,6 @@ class meshext:
 			instance_matrix.translate(tx,ty,tz)
 
 			final_matrix = parent_matrix_inverse * instance_matrix * offset_matrix
-			# final_matrix = parent_matrix_inverse * instance_matrix
 
 			s_,r_,t_ = final_matrix.decompose()
 
@@ -98,14 +88,14 @@ class meshext:
 			n.par.rx,n.par.ry,n.par.rz = r_
 			n.par.sx,n.par.sy,n.par.sz = s_
 
-			n.par.Colormultiplyr = r
-			n.par.Colormultiplyg = g
-			n.par.Colormultiplyb = b
-			n.par.Colormultiplya = a
+			n.par.Colorr = r
+			n.par.Colorg = g
+			n.par.Colorb = b
+			n.par.Colora = a
 
-			n.par.Uvoffsetu = u
-			n.par.Uvoffsetv = v
-			n.par.Uvoffsetw = w
+			n.par.Uvwoffsetu = u
+			n.par.Uvwoffsetv = v
+			n.par.Uvwoffsetw = w
 		
 		return
 

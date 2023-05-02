@@ -336,7 +336,7 @@ class instancepaintgizmoext:
 
 	def Brush_End(self, pos, nrm, uvw, col):
 		
-		instanceable_obj_types = parent.Viewport.Type_Group('INSTANCEABLE')
+		instanceable_obj_types = op.TDFIL.Type_Group('INSTANCEABLE')
 
 		if len(self.selectedItems) == 0:
 			debug('no instancable objects selected. Please check selection, and ensure instancing is enabled on your objects.')

@@ -41,7 +41,10 @@ return TD_Inverse_Tonemap_Filmic(pow(color, vec3(2.2)));
 #if defined(IS_SHADING_MODEL)
 
 vec2 tdGetUV0() {
-    return vec2( vertex_uv01.xy );
+    #if defined(HAS_ATTRIBUTE_UV0)
+        return vec2( vertex_uv01.xy );
+    #endif
+    return vec2( 0.0 );
 }
 
 uint TDCameraIndex()
@@ -305,6 +308,17 @@ float objectUniforms_userData(int i)
     return -1;
 }
 
+
+// mat4 objectUniforms_instanceColor(int i)
+// {
+//     if(td_instancing_enabled == 0){
+//         return uTDMats[TDCameraIndex()].world;
+//     }
+//     else{
+//         return uTDMats[TDCameraIndex()].world * TDInstanceMat(i);
+//     }
+// }
+
 #endif
 
 /////////////////////////////////////////////////////
@@ -365,7 +379,7 @@ mat4 frameUniforms_worldFromClipMatrix()
 {
     // takes point in clip space, puts it in world space.
     #if defined(IS_SHADING_MODEL)
-    return uTDMats[TDCameraIndex()].camProjInverse;
+    return uTDMats[TDCameraIndex()].worldCamProjInverse;
     #endif
     return mat4(1);
     
@@ -625,6 +639,29 @@ float frameUniforms_refractionLodOffset()
     return uFrameUniforms[91];
 }
 
+float frameUniforms_oneOverFarMinusNear()
+{
+    // we could return this via TD channels, but since Touch already prepares this for us
+    // we use that for convenience. eventually we'll want to support multi camera rendering all around, and will have
+    // to figure this out.
+    // return uFrameUniforms[93];
+
+    #if defined(IS_SHADING_MODEL)
+        return uTDCamInfos[TDCameraIndex()].nearFar.w;
+    #endif
+    return 1.0;
+}
+
+float frameUniforms_nearOverFarMinusNear()
+{
+    return uFrameUniforms[93];
+}
+
+vec4 frameUniforms_sun()
+{
+    return vec4(uFrameUniforms[94], uFrameUniforms[95], uFrameUniforms[96], uFrameUniforms[97]);
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////
 // Material Uniforms ///////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -652,6 +689,10 @@ vec3 materialParams_baseColor()
     #ifdef BASE_COLOR_METHOD_3 // uniform * top
         baseColor = TD_inverseTonemapSRGB( texture( mat_baseColor , tdGetUV0() ).rgb );
         baseColor *= vec3( uMaterialParams[0][uTDPass], uMaterialParams[1][uTDPass], uMaterialParams[2][uTDPass] );
+    #endif
+
+    #ifdef HAS_ATTRIBUTE_COLOR // has vertex colors. NOTE: if instancing is enabled, vertex colors are replaced/modified by instancing parameters in vertex shader
+        baseColor *= vertex_color.rgb;
     #endif
 
 
@@ -1082,6 +1123,21 @@ int materialParams_count()
 vec2 materialParams_kernel(uint i)
 {
     return vec2( uMaterialParams[128 + (i * 2)][uTDPass] , uMaterialParams[129 + (i * 2 + 1)][uTDPass] );
+}
+
+int materialParams_constantColor()
+{
+    return int(uMaterialParams[49][uTDPass]);
+}
+
+int materialParams_showSun()
+{
+    return int(uMaterialParams[50][uTDPass]);
+}
+
+vec4 materialParams_color()
+{
+    return vec4(uMaterialParams[51][uTDPass], uMaterialParams[52][uTDPass], uMaterialParams[53][uTDPass], uMaterialParams[54][uTDPass]);
 }
 
 

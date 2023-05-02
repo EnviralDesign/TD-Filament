@@ -126,6 +126,10 @@ def define_AMBIENT_OCCULSION(scriptOp):
 		if parent.obj.par.Globalssao.menuIndex in [1]:
 			scriptOp.text += f'#define MATERIAL_HAS_SSAO\n'
 		scriptOp.text += '\n'
+	
+	# if parent.obj.par.Shadingmodel.eval() in ['unlit']:
+	# 	scriptOp.text += f'#define MATERIAL_HAS_AMBIENT_OCCLUSION\n'
+	# 	scriptOp.text += '\n'
 	return
 
 def define_METALLIC(scriptOp):
@@ -188,7 +192,8 @@ def define_SHEEN(scriptOp):
 		if parent.obj.par.Sheenmethod.menuIndex > 0 or parent.obj.par.Shadingmodel.eval() == 'cloth':
 			if parent.obj.par.Sheenmethod.menuIndex in [2]:
 				scriptOp.text += f'uniform sampler2D mat_sheenColor; \n'
-			scriptOp.text += f'#define MATERIAL_HAS_SHEEN_COLOR\n'
+			if parent.obj.par.Shadingmodel.eval() != 'cloth':
+				scriptOp.text += f'#define MATERIAL_HAS_SHEEN_COLOR\n'
 			if parent.obj.par.Shadingmodel.eval() in ['lit']:
 				scriptOp.text += f'#define MATERIAL_HAS_SHEEN_ROUGHNESS\n'
 			scriptOp.text += f'#define SHEEN_ROUGHNESS_METHOD_{parent.obj.par.Sheenroughnessmethod.menuIndex} \n'
@@ -295,6 +300,18 @@ def define_HAS_ATTRIBUTE_UV0(scriptOp):
 	scriptOp.text += f'#define HAS_ATTRIBUTE_UV0 \n'
 	scriptOp.text += '\n'	
 
+def define_HAS_ATTRIBUTE_COLOR(scriptOp):
+	# if we need to, we can bring back explicit control of vertex color
+	# if parent.obj.par.Vertexcolormethod.eval() in ['enabled']:
+	scriptOp.text += f'#define HAS_ATTRIBUTE_COLOR \n'
+	scriptOp.text += '\n'	
+
+def define_VARIANT_LIGHTING(scriptOp):
+	scriptOp.text += f'#define VARIANT_HAS_DIRECTIONAL_LIGHTING\n'
+	scriptOp.text += f'#define VARIANT_HAS_SHADOWING\n'
+	scriptOp.text += f'#define VARIANT_HAS_DYNAMIC_LIGHTING\n'
+	scriptOp.text += '\n'
+
 	
 
 def onCook(scriptOp):
@@ -346,6 +363,11 @@ def onCook(scriptOp):
 	define_MATERIAL_HAS_DOUBLE_SIDED_CAPABILITY(scriptOp)
 	# define_POST_LIGHTING_BLEND_MODE_TRANSPARENT(scriptOp)
 	define_HAS_ATTRIBUTE_UV0(scriptOp)
+	define_HAS_ATTRIBUTE_COLOR(scriptOp)
+
+	# define_VARIANT_LIGHTING(scriptOp)
+
+
 	scriptOp.text += '\n'
 
 	

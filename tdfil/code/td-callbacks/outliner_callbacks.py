@@ -259,6 +259,9 @@ def onRollover(comp, row, col, coords, prevRow, prevCol, prevCoords):
 
 def onSelect(comp, startRow, startCol, startCoords, endRow, endCol, endCoords, start, end):
 	
+	# this happens so that if the user clicks on an empty part of the outliner, on release we can know if we should deselect all, or not.
+	parent.outliner.store('row_clicked', True)
+
 	modeLookup = {
 		3:'selection',
 		1:'expandcollapse',

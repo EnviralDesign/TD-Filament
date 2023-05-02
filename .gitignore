@@ -5,7 +5,7 @@
 # automated local installations and dependancies
 # .py
 # .td
-# .tmp
+.tmp
 # *_Log.txt
 # GP/LIBRARY/PROJECTS/GeoPixProjectConfig.txt
 # *.gp
@@ -88,3 +88,4 @@ TouchDesignerCrash.*.dmp
 tdfil/hdr/*
 tdfil/samples/assets/SubstanceShaderTester/*
 CrashAutoSave.toe
+td-filament.car.toe
