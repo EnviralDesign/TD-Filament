@@ -365,7 +365,7 @@ def onCook(scriptOp):
 	define_HAS_ATTRIBUTE_UV0(scriptOp)
 	define_HAS_ATTRIBUTE_COLOR(scriptOp)
 
-	# define_VARIANT_LIGHTING(scriptOp)
+	define_VARIANT_LIGHTING(scriptOp)
 
 
 	scriptOp.text += '\n'
